@@ -27,7 +27,7 @@ exports.updateProduct = async (req, res) => {
         const { name, seller, categories, state, description, ubication, price, shipping, issold, photo} = req.body;
         let product = await Product.findById(req.params.id);
 
-        if(!producto) {
+        if(!product) {
             res.status(404).json({ msg: 'No existe el producto'});
         }else {
             product.name = name;
@@ -50,7 +50,7 @@ exports.updateProduct = async (req, res) => {
     }
 }
 
-exports.obtenerProducto = async (req, res) => {
+exports.getProduct = async (req, res) => {
     try {
         let product = await Product.findById(req.params.id);
         if(!product) {
@@ -64,7 +64,7 @@ exports.obtenerProducto = async (req, res) => {
     }
 }
 
-exports.eliminarProducto = async (req, res) => {
+exports.deleteProduct = async (req, res) => {
     try {
         let product = await Product.findById(req.params.id);
         if(!product) {
