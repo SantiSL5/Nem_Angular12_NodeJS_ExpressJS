@@ -7,32 +7,36 @@ services:
     tty: true
     working_dir: /home/node/app
     ports:
-      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+      - $BACKEND_LOCAL_PORT:$BACKEND_DOCKER_PORT
     volumes:
       - ./backend:/home/node/app
+      - ../error.log:/usr/src/app/error.log
     networks:
-      - nem-backend
+      - nem-network
     depends_on: 
       - nemmongodb
-    command: /bin/bash -c "usermod -u `stat -c '%u' package.json` node && groupmod -g `stat -c '%g' package.json` node && su node -c 'npm install && npm run dev'"
+    command: /bin/bash -c "usermod -u `stat -c '%u' .` node && groupmod -g `stat -c '%g' .` node && su node -c 'npm install && npm run dev'"
   nemfrontend:
     container_name: nemfrontend
     image: node:latest
+    tty: true
     working_dir: /home/node/app
+    ports:
+      - $FRONTEND_LOCAL_PORT:$FRONTEND_DOCKER_PORT
     volumes:
-      - ./frontend-angular:/home/node/app
-    command: /bin/bash -c "usermod -u `stat -c '%u' .` node && groupmod -g `stat -c '%g' .` node && su node -c 'npm install && npm run dev'"
+      - ./frontend:/home/node/app
+    networks:
+      - nem-network
+    command: /bin/bash -c "usermod -u `stat -c '%u' .` node && groupmod -g `stat -c '%g' .` node && su node -c 'npm install && npm start'"
   nemmongodb:
     container_name: nemmongo
     image: mongo:latest
     environment:
       - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
       - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
-    ports:
-      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
     volumes:
       - ./backend/data:/data/db
     networks:
-      - nem-backend
+      - nem-network
 networks:
-  nem-backend:
+  nem-network:
