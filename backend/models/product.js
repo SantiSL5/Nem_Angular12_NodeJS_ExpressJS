@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
+const uniqueValitador = require('mongoose-unique-validator');
+const slugf = require('slug');
 
 const ProductSchema = mongoose.Schema({
+    slug: {
+        type: String,
+        lowercase: true,
+        unique: true
+    },
     name: {
         type: String,
         required: true
@@ -9,13 +16,14 @@ const ProductSchema = mongoose.Schema({
         type: String,
         required:true
     },
-    categories: {
-        type: [String],
+    category: {
+        type: String,
         required: true
     },
     state: {
-        type: String,
-        required: false
+        type: Number,
+        enum : [1,2,3,4,5],
+        required: true
     },
     description: {
         type: String,
@@ -41,10 +49,25 @@ const ProductSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    dataCreate: {
+    dateCreate: {
         type: Date,
         default: Date.now()
     }
 }, { versionKey: false });
+
+
+ProductSchema.plugin(uniqueValitador, {message: 'is already taken'});
+
+ProductSchema.pre('validate', function(next) {
+    if (!this.slug) {
+        this.slugify();
+    }
+
+    next();
+});
+
+ProductSchema.methods.slugify = function() {
+    this.slug = slugf(this.name) + '-' + (Math.random() * Math.pow(36, 6) | 0);
+};
 
 module.exports = mongoose.model('Product', ProductSchema);

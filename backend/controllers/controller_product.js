@@ -1,4 +1,4 @@
-const Product = require("../models/model");
+const Product = require("../models/product");
 
 exports.createProduct = async (req, res) => {
   try {
@@ -24,7 +24,7 @@ exports.getProducts = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
     try {
-        const { name, seller, categories, state, description, ubication, price, shipping, issold, photo} = req.body;
+        const { name, seller, category, state, description, ubication, price, shipping, issold, photo} = req.body;
         let product = await Product.findById(req.params.id);
 
         if(!product) {
@@ -32,7 +32,7 @@ exports.updateProduct = async (req, res) => {
         }else {
             product.name = name;
             product.seller = seller;
-            product.categories = categories;
+            product.category = category;
             product.state = state;
             product.description = description;
             product.ubication= ubication;
@@ -41,7 +41,7 @@ exports.updateProduct = async (req, res) => {
             product.issold=issold;
             product.photo=photo;
     
-            product = await Product.findOneAndUpdate({ _id:req.params.id},product, { new:true });
+            product = await Product.findOneAndUpdate({ "slug":req.params.slug},product, { new:true });
             res.json(product);
         }
     } catch (error) {
@@ -52,7 +52,7 @@ exports.updateProduct = async (req, res) => {
 
 exports.getProduct = async (req, res) => {
     try {
-        let product = await Product.findById(req.params.id);
+        let product = await Product.findOne({"slug":req.params.slug});
         if(!product) {
             res.status(404).json({ msg: 'No existe el producto'});
         }else {
@@ -66,7 +66,7 @@ exports.getProduct = async (req, res) => {
 
 exports.deleteProduct = async (req, res) => {
     try {
-        let product = await Product.findById(req.params.id);
+        let product = await Product.findOne({"slug":req.params.slug});
         if(!product) {
             res.status(404).json({ msg: 'No existe el producto'});
         }else {
