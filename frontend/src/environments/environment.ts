@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url:'nembackend:4000'
+  urlProduct:'http://localhost:4000/api/product'
 };  
 
 /*

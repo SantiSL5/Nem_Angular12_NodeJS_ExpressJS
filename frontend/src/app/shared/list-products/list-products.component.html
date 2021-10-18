@@ -1,0 +1,10 @@
+<div class="main">
+    <h1>All Items</h1>
+    <ul class="cards">
+  
+      <li class="cards_item" *ngFor="let product of listProducts">
+        <h2 class="card_title">{{product.name}}<span>{{product.price | currency: 'EUR' }}</span></h2>
+      </li>
+      
+    </ul>
+  </div>

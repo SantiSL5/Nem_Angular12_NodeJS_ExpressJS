@@ -15,7 +15,12 @@ exports.createProduct = async (req, res) => {
 exports.getProducts = async (req, res) => {
     try {
         const products = await Product.find();
-        res.json(products); 
+        res.json(products);
+        // return res.json({
+        //     products: products.map(function(product){
+        //       return product.toJSONFor();
+        //     })
+        // });
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
@@ -70,7 +75,7 @@ exports.deleteProduct = async (req, res) => {
         if(!product) {
             res.status(404).json({ msg: 'No existe el producto'});
         }else {
-            await Product.findOneAndRemove({ _id:req.params.id });
+            await Product.findOneAndRemove({ "slug":req.params.slug });
             res.json({ msg: 'Producto eliminado con éxito!' });
         }
     } catch (error) {

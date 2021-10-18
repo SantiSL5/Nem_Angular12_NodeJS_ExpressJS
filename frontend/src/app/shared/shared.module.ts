@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './layout/header.component';
+import { ListProductsComponent } from './list-products/list-products.components';
 
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    ListProductsComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { HeaderComponent } from './layout/header.component';
     RouterModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    ListProductsComponent
   ]
 })
 export class SharedModule { }

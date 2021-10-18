@@ -50,7 +50,7 @@ const ProductSchema = mongoose.Schema({
         required: true
     },
     dateCreate: {
-        type: Date,
+        type: String,
         default: Date.now()
     }
 }, { versionKey: false });
@@ -62,12 +62,28 @@ ProductSchema.pre('validate', function(next) {
     if (!this.slug) {
         this.slugify();
     }
-
     next();
 });
 
 ProductSchema.methods.slugify = function() {
     this.slug = slugf(this.name) + '-' + (Math.random() * Math.pow(36, 6) | 0);
 };
+
+ProductSchema.methods.toJSONfor = function() {
+    return {
+        slug: this.slug,
+        name: this.name,
+        seller: this.seller,
+        category: this.category,
+        state: this.state,
+        description: this.description,      
+        ubication: this.ubication,
+        price: this.price,
+        shipping: this.shipping,
+        issold: this.issold,
+        photo: this.photo,
+        dateCreate: this.dateCreate
+    }
+}
 
 module.exports = mongoose.model('Product', ProductSchema);
