@@ -15,6 +15,7 @@ exports.createProduct = async (req, res) => {
 exports.getProducts = async (req, res) => {
     try {
         const products = await Product.find();
+        // res.json(req.query);
         res.json(products);
         // return res.json({
         //     products: products.map(function(product){
@@ -29,8 +30,8 @@ exports.getProducts = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
     try {
-        const { name, seller, category, state, description, ubication, price, shipping, issold, photo} = req.body;
-        let product = await Product.findById(req.params.id);
+        const {name, seller, category, state, description, ubication, price, shipping, issold, photo} = req.body;
+        let product = await Product.findOne({"slug":req.params.slug});
 
         if(!product) {
             res.status(404).json({ msg: 'No existe el producto'});

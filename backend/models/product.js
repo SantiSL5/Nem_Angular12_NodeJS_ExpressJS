@@ -21,8 +21,7 @@ const ProductSchema = mongoose.Schema({
         required: true
     },
     state: {
-        type: Number,
-        enum : [1,2,3,4,5],
+        type: String,
         required: true
     },
     description: {
