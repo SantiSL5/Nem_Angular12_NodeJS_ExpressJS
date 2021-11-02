@@ -1,0 +1,9 @@
+mdb-carousel {
+    height: 200px;
+}
+
+mdb-carousel img {
+    height: 500px;
+    width: 100%;
+    outline: none;
+}
