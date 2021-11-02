@@ -11,7 +11,15 @@ export class CategoryService {
 
   constructor(private http: HttpClient) {}
     
-  getCategories(): Observable<any> {
+  getAllCategories(): Observable<any> {
     return this.http.get(environment.urlCategory);
+  }
+
+  getCategories(offset: number, limit: number): Observable<any> {
+    let params = new HttpParams()
+    .set('offset', offset)
+    .set('limit', limit);
+
+    return this.http.get(environment.urlCategory + '/scroll/', {params});
   }
 }

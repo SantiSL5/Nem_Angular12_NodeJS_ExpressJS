@@ -12,7 +12,17 @@ exports.createCategory = async (req, res) => {
   }
 }
 
-exports.getCategories = async (req, res) => {
+exports.scrollCategories = async (req, res) => {
+    try {
+        const categories = await Category.find().skip(Number(req.query.offset)).limit(Number(req.query.limit));
+        res.json(categories);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
+
+exports.getAllCategories = async (req, res) => {
     try {
         const categories = await Category.find();
         res.json(categories);

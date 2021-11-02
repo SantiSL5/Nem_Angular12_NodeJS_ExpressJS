@@ -6,20 +6,23 @@ import { SharedModule } from '../shared/shared.module';
 import { CarouselComponent } from './carousel/carousel.component';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { ScrollComponent } from './scroll/scroll.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    CarouselComponent
+    CarouselComponent,
+    ScrollComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     HomeRoutingModule,
     MdbCarouselModule,
-    NgbModule
+    NgbModule,
+    InfiniteScrollModule
   ]
 })
 export class HomeModule { }

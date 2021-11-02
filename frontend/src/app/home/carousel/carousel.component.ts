@@ -19,9 +19,8 @@ export class CarouselComponent implements OnInit {
   }
 
   getAllCategories(): void {
-      this._categoryService.getCategories().subscribe((data: Category[]) => {
+      this._categoryService.getAllCategories().subscribe((data: Category[]) => {
           this.listCategories = data;
-          console.log(this.listCategories);
       }, (error: any) => {
           console.log(error);
       })

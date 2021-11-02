@@ -1,5 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css"; 
+
+
 body {
     padding: 0px;
     margin: 0px;
 }
+
+.carousel-indicators button{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1px solid white;
+    background-color: white;
+    margin: 5px;
+}
+
+.carousel-indicators button.active{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: black;
+    border: 1px solid black;
+    margin: 5px;
+}
+

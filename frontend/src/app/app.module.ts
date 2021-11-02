@@ -8,7 +8,9 @@ import { ShopModule } from './shop/shop.module';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from './shared/shared.module';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +22,10 @@ import { SharedModule } from './shared/shared.module';
     HomeModule,
     ShopModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    NgbModule,
+    MdbCarouselModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
