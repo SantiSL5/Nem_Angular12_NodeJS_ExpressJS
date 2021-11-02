@@ -5,12 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './layout/header.component';
 import { ListProductsComponent } from './list-products/list-products.components';
-
+import { ListDetailsComponent } from './list-details/list-details.component';
+import { FiltersComponent } from './filters/filters.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    ListDetailsComponent,
+    FiltersComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,

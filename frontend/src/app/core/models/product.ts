@@ -1,6 +1,7 @@
 export class Product {
     slug: string;
     name: string;
+    category: string;
     seller: string;
     state: number;
     description: string;
@@ -11,9 +12,10 @@ export class Product {
     photo: string;
     dateCreate: string;
 
-    constructor( slug: string, name: string, seller: string, state: number, price: number, description: string, ubication: string, shipping: boolean, issold: boolean, photo: string, dateCreate: string ) {
+    constructor( slug: string, name: string, category: string ,seller: string, state: number, price: number, description: string, ubication: string, shipping: boolean, issold: boolean, photo: string, dateCreate: string ) {
         this.slug = slug;
         this.name = name;
+        this.category = category;
         this.seller = seller;
         this.state = state;
         this.description = description;

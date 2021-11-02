@@ -1,10 +1,33 @@
 <div class="main">
-    <h1>All Items</h1>
-    <ul class="cards">
-  
-      <li class="cards_item" *ngFor="let product of listProducts">
-        <h2 class="card_title">{{product.name}}<span>{{product.price | currency: 'EUR' }}</span></h2>
-      </li>
-      
-    </ul>
+    <div class="container page-wrapper">
+      <div class="page-inner">
+        <div class="row">
+          <div class="el-wrapper">
+              <div class="card" *ngFor="let product of listProducts" [routerLink]="['/shop/item', product.slug]">
+                  <div class="box-up">
+                      <img class="img" src="../../../assets/img/{{product.photo}}" alt="">
+                      <div class="img-info">
+                          <div class="info-inner">
+                              <span class="p-name">{{product.name}}€</span>
+                              <span class="p-category">{{product.category}}€</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="box-down">
+                    <div class="h-bg">
+                      <div class="h-bg-inner"></div>
+                    </div>
+          
+                    <a class="cart" href="#">
+                      <span class="price">{{product.price}}€</span>
+                      <span class="add-to-cart">
+                        <span class="txt">Add to card</span>
+                      </span>
+                    </a>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
