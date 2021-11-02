@@ -50,7 +50,7 @@ PORT es el puerto en el que se desplegara el backend, en este caso el 4001.
 
 A continuación se mostraran los 3 dockerfiles que debemos crear:
 
-##Dockerfile mongodb
+## Dockerfile mongodb
 
 FROM mongo:latest (indica la imagen en la que se basa para crear nuestra imagen personalizada, en este caso mongo:latest)
 EXPOSE 27017 (expone el puerto 27017)
@@ -59,7 +59,7 @@ ENV MONGO_INITDB_ROOT_PASSWORD=admin (define la contraseña del usuario root)
 
 ![7](https://user-images.githubusercontent.com/76181286/139927407-41771cf7-9710-4c77-a87c-69cf63f9e1c0.png)
 
-##Dockerfile backend
+## Dockerfile backend
 
 FROM node:latest (indica la imagen en la que se basa para crear nuestra imagen personalizada, en este caso node:latest)
 EXPOSE 4001 (expone el puerto 4001)
