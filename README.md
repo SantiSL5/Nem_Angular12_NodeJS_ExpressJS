@@ -68,7 +68,7 @@ CMD npm install | npm start (instalará los paquetes necesarios y iniciará el b
 
 ![5](https://user-images.githubusercontent.com/76181286/139926497-739d22bb-2758-491b-8492-f44c2b9233ed.png)
 
-##Dockerfile frontend
+## Dockerfile frontend
 
 FROM node:latest (indica la imagen en la que se basa para crear nuestra imagen personalizada, en este caso node:latest)
 EXPOSE 4200 (expone el puerto 4200)
