@@ -32,25 +32,25 @@ exports.getAllCategories = async (req, res) => {
     }
 }
 
-exports.updateCategory = async (req, res) => {
-    try {
-        const {name, photo} = req.body;
-        let category = await Category.findById(req.params.id);
+// exports.updateCategory = async (req, res) => {
+//     try {
+//         const {name, photo} = req.body;
+//         let category = await Category.findById(req.params.id);
 
-        if(!category) {
-            res.status(404).json({ msg: 'No existe la categoria'});
-        }else {
-            category.name= name;
-            category.photo=photo;
+//         if(!category) {
+//             res.status(404).json({ msg: 'No existe la categoria'});
+//         }else {
+//             category.name= name;
+//             category.photo=photo;
     
-            category = await Category.findOneAndUpdate({ "slug":req.params.slug},category, { new:true });
-            res.json(category);
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Hubo un error');
-    }
-}
+//             category = await Category.findOneAndUpdate({ "slug":req.params.slug},category, { new:true });
+//             res.json(category);
+//         }
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).send('Hubo un error');
+//     }
+// }
 
 exports.deleteCategory = async (req, res) => {
     try {

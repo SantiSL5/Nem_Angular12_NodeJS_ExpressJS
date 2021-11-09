@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Category = require("../models/category");
 const uniqueValitador = require('mongoose-unique-validator');
 const slugf = require('slug');
 
@@ -17,8 +18,7 @@ const ProductSchema = mongoose.Schema({
         required:true
     },
     category: {
-        type: String,
-        required: true
+        type: String
     },
     state: {
         type: String,
@@ -40,10 +40,6 @@ const ProductSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    issold: {
-        type: Boolean,
-        default: false
-    },
     photo: {
         type: String,
         required: true
@@ -52,8 +48,18 @@ const ProductSchema = mongoose.Schema({
         type: String,
         default: Date.now()
     }
-}, { versionKey: false });
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    versionKey: false
+});
 
+ProductSchema.virtual('categoryname',{
+    ref: 'Category',
+    localField: 'category',
+    foreignField: 'slug',
+    justOne: true
+})
 
 ProductSchema.plugin(uniqueValitador, {message: 'is already taken'});
 
@@ -79,9 +85,9 @@ ProductSchema.methods.toJSONfor = function() {
         ubication: this.ubication,
         price: this.price,
         shipping: this.shipping,
-        issold: this.issold,
         photo: this.photo,
-        dateCreate: this.dateCreate
+        dateCreate: this.dateCreate,
+        categoryname: this.categoryname
     }
 }
 
