@@ -24,7 +24,10 @@ import { PaginationComponent } from './pagination/pagination.component';
   ],
   exports: [
     HeaderComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    ListDetailsComponent,
+    FiltersComponent,
+    PaginationComponent
   ]
 })
 export class SharedModule { }

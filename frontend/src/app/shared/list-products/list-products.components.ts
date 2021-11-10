@@ -1,9 +1,12 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Component, Input, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
-import { environment } from "src/environments/environment";
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Subject } from "rxjs";
+// import { Observable } from "rxjs";
+// import { environment } from "src/environments/environment";
 import { Product } from '../../core/models/product';
 import { ProductService } from "../../core/services/product.service";
+import { PaginationComponent } from "../pagination/pagination.component";
 
 @Component({
     selector: 'app-list-products',
@@ -13,35 +16,37 @@ import { ProductService } from "../../core/services/product.service";
 
 export class ListProductsComponent {
 
+    @ViewChild(PaginationComponent)
+    private pagcomponent: PaginationComponent = new PaginationComponent;
+
+    category: String | undefined;
+    search: String | undefined;
+    shipping: Boolean | undefined;
+    limit: number = 3;
+    offset: number = 0;
     listProducts: Product[] = [];
-    ProductService: any;
 
-    constructor(private _productService: ProductService ,private http: HttpClient) {}
-    
+    constructor(private _productService: ProductService, private route: ActivatedRoute) {}
+
     ngOnInit(): void {
-        this.getAllProducts();
+        this.route.queryParams.subscribe(params => {
+            this.category = params['category'];
+            this.search = params['search'];
+        });
+        this.getProducts();
     }
-    
-    // getAllProducts(offset: number, limit: number, categ: string, search: string, filtering: boolean, filters: {}): Observable<any> {
-      
-    //     let params = new HttpParams({fromObject: filters})
-    //     .set('offset', offset)
-    //     .set('limit', limit)
-    //     .set('category', categ)
-    //     .set('search', search)
-    //     .set('filtering', filtering);
-  
-    //     return this.http.get(environment.urlProduct, {params});
-    // }
 
-    getAllProducts(): void {
-        let httpParams = new HttpParams();
-        httpParams.set("shipping", true);
-        this._productService.getProducts(httpParams).subscribe((data: Product[]) => {
-            this.listProducts = data;
-            console.log(this.listProducts);
+    getProducts(): void {
+        this._productService.getProducts(this).subscribe((data: any) => {
+            this.listProducts= data.products;
+            this.pagcomponent.setnumpages(Math.ceil(data.numproducts/this.limit));
         }, (error: any) => {
             console.log(error);
         })
+    }
+
+    changeOffset(offset: number): void {
+        this.offset=offset;
+        this.getProducts();
     }
 }

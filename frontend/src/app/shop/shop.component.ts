@@ -9,24 +9,12 @@ import { Product } from '../core/models/product';
 })
 export class ShopComponent implements OnInit {
 
-  category: String= '';
-  search: String= '';
-  shipping: any= '';
-  listProducts: Product[] = [];
-  numpages: number = 0;
-  currentPage: number = 0;
-  limit: number = 3;
-  offset: number = 0;
-
   constructor(
     private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.category = params['category'];
-      this.search = params['search'];
-    });
+
   }
 
 }

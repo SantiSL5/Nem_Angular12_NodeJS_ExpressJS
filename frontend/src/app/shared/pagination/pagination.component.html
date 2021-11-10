@@ -1,1 +1,9 @@
-<p>pagination works!</p>
+<div class="divpagination">
+    <div class="pagination">
+      <ul>
+        <button (click)="changepage('down')" class="pagbutton"><li><</li></button>
+        <button *ngFor="let page of pages" [class.active]="page == actualpage" (click)="changepage(page)"><li>{{page}}</li></button>
+        <button (click)="changepage('up')" class="pagbutton"><li>></li></button>
+      </ul>
+    </div>
+</div>

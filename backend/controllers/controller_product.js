@@ -17,20 +17,26 @@ exports.createProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
     try {
-        console.log(req.query.cat);
-        queryfind={}
-        if (req.query.cat) queryfind.category=req.query.cat;
-        if (req.query.search) queryfind.name=new RegExp('.*'+req.query.search+'*.',"i");
-        if (req.query.ship != undefined ) queryfind.shipping=req.query.ship;
-        offset=Number(req.query.offset) | 0;
-        limit=Number(req.query.limit) | 3
-        console.log(queryfind)
+        console.log(req.query);
+        queryfind={};
+        if (req.query.cat != 'undefined' && req.query.cat != undefined) queryfind.category=req.query.cat;
+        if (req.query.search != 'undefined' && req.query.search != undefined) queryfind.name=new RegExp('.*'+req.query.search+'*.',"i");
+        if (req.query.ship == 'true') {
+            ship=true;
+        }else if (req.query.ship == 'false') {
+            ship=false;
+        }
+        if (req.query.ship != 'undefined' && req.query.ship != undefined) queryfind.shipping=req.query.ship;
+        console.log(queryfind);
+        offset=Number(req.query.offset) || 0;
+        limit=Number(req.query.limit) || 3;
+        console.log(limit);
+        console.log(queryfind);
         const products= await Product.find(queryfind).populate('categoryname').skip(offset*limit).limit(limit);
         const numproducts= await Product.aggregate([{$match:queryfind},{$count:"numproducts"}]);
         const result = {'numproducts': numproducts[0].numproducts,'products': products};
-        console.log(numproducts);
-        console.log(result);
-        res.json(products);
+        console.log(products);
+        res.json(result);
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
