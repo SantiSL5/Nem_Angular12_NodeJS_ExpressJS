@@ -20,9 +20,7 @@ export class ScrollComponent implements OnInit {
 
   getScroll(){
     this._categoriesService.getCategories(this.offset, this.limit).subscribe(data => {
-      console.log(this.listCategories);
       this.listCategories.push.apply(this.listCategories, data);
-      console.log(this.listCategories);
     }, error => {
       console.log(error);
     })

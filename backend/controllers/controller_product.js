@@ -27,16 +27,18 @@ exports.getProducts = async (req, res) => {
             ship=false;
         }
         if (req.query.ship != 'undefined' && req.query.ship != undefined) queryfind.shipping=req.query.ship;
-        console.log(queryfind);
         offset=Number(req.query.offset) || 0;
         limit=Number(req.query.limit) || 3;
-        console.log(limit);
-        console.log(queryfind);
         const products= await Product.find(queryfind).populate('categoryname').skip(offset*limit).limit(limit);
         const numproducts= await Product.aggregate([{$match:queryfind},{$count:"numproducts"}]);
-        const result = {'numproducts': numproducts[0].numproducts,'products': products};
         console.log(products);
-        res.json(result);
+        if (products.length==0) {
+            console.log(numproducts)
+            res.json({'numproducts':0});
+        }else {
+            const result = {'numproducts': numproducts[0].numproducts,'products': products};
+            res.json(result);
+        }
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');

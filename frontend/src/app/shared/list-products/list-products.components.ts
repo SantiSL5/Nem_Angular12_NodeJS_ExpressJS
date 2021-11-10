@@ -25,6 +25,7 @@ export class ListProductsComponent {
     limit: number = 3;
     offset: number = 0;
     listProducts: Product[] = [];
+    isProducts: Boolean = true;
 
     constructor(private _productService: ProductService, private route: ActivatedRoute) {}
 
@@ -38,8 +39,15 @@ export class ListProductsComponent {
 
     getProducts(): void {
         this._productService.getProducts(this).subscribe((data: any) => {
-            this.listProducts= data.products;
-            this.pagcomponent.setnumpages(Math.ceil(data.numproducts/this.limit));
+            if (data.numproducts==0) {
+                this.pagcomponent.hide=true;
+                this.isProducts=false;
+            }else {
+                this.pagcomponent.hide=false;
+                this.isProducts=true;
+                this.listProducts= data.products;
+                this.pagcomponent.setnumpages(Math.ceil(data.numproducts/this.limit));
+            }
         }, (error: any) => {
             console.log(error);
         })

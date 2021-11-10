@@ -1,5 +1,5 @@
 <mdb-carousel [interval]=3000 [controls]="true" [indicators]="true" class="carousel slide carousel-fade" [animation]="'fade'" #carousel>
-  <mdb-carousel-item class="caraousel-item active" [routerLink]="['/shop']" [queryParams]="{category: listCategories[0].slug}">
+  <mdb-carousel-item class="caraousel-item" [routerLink]="['/shop']" [queryParams]="{category: listCategories[0].slug}">
     <img
       src="../../../assets/img/{{listCategories[0].photo}}"
       class="d-block w-100"

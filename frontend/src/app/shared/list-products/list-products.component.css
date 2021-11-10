@@ -37,6 +37,11 @@ body {
   vertical-align: middle;
 }
 
+.row h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .el-wrapper {
     width: 100%;
     display: flex;

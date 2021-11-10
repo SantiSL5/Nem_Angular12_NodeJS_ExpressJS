@@ -11,6 +11,7 @@ export class PaginationComponent implements OnInit {
   pages: number[] = [];
   uphide: Boolean = false;
   downhide: Boolean = false;
+  hide: Boolean = true;
   @Output() change_offset = new EventEmitter<number>();
 
   constructor() { }
@@ -42,6 +43,7 @@ export class PaginationComponent implements OnInit {
         this.actualpage=change;
       }
     }
+
     console.log(this.actualpage);
     this.change_offset.emit(this.actualpage-1);
   }

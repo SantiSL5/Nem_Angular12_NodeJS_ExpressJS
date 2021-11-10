@@ -2,7 +2,8 @@
   <div class="container page-wrapper">
     <div class="page-inner">
       <div class="row">
-        <div class="el-wrapper">
+        <h1 [hidden]="isProducts">No se han encontrado resultados</h1>
+        <div [hidden]="!isProducts" class="el-wrapper">
           <div class="card" *ngFor="let product of listProducts" [routerLink]="['/shop/item', product.slug]">
             <div class="box-up">
               <img class="img" src="../../../assets/img/{{product.photo}}" alt="">
