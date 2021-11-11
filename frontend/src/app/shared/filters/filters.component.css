@@ -1,0 +1,7 @@
+div {
+    background-color: #35A189;
+}
+
+div > * {
+    margin: 20px;
+}

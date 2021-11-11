@@ -1,1 +1,11 @@
-<p>filters works!</p>
+<div>
+    <select name="category">
+        <option (click)="categoryset(undefined)">Category</option>
+        <option *ngFor="let category of listCategories" (click)="categoryset(category.slug)">{{category.name}}</option>
+    </select>
+    <select name="shipping">
+        <option (click)="shipset(undefined)">Ship</option>
+        <option (click)="shipset(true)">With ship</option>
+        <option (click)="shipset(false)">Without ship</option>
+    </select>
+</div>

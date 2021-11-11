@@ -23,10 +23,11 @@ exports.getProducts = async (req, res) => {
         if (req.query.search != 'undefined' && req.query.search != undefined) queryfind.name=new RegExp('.*'+req.query.search+'*.',"i");
         if (req.query.ship == 'true') {
             ship=true;
+            queryfind.shipping=true;
         }else if (req.query.ship == 'false') {
             ship=false;
+            queryfind.shipping=false;
         }
-        if (req.query.ship != 'undefined' && req.query.ship != undefined) queryfind.shipping=req.query.ship;
         offset=Number(req.query.offset) || 0;
         limit=Number(req.query.limit) || 3;
         const products= await Product.find(queryfind).populate('categoryname').skip(offset*limit).limit(limit);

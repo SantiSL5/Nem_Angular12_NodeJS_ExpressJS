@@ -30,5 +30,4 @@ export class ListDetailsComponent implements OnInit {
       console.log(error);
     })
   }
-
 }

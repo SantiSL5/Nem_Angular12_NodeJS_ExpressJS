@@ -86,4 +86,16 @@ export class ListProductsComponent {
         this.offset=offset;
         this.getProducts();
     }
+
+    categoryFilt(category:String|undefined) {
+        this.offset=0;
+        this.category=category;
+        this.getProducts();
+    }
+
+    shipFilt(ship:Boolean|undefined) {
+        this.offset=0;
+        this.shipping=ship;
+        this.getProducts();
+    }
 }
