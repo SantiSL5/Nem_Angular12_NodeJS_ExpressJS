@@ -17,7 +17,6 @@ export class ListDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
 
       this.productslug = String(params.get('slug'));
-      console.log(this.productslug);
     })
     this.getProduct();
   }
@@ -25,7 +24,6 @@ export class ListDetailsComponent implements OnInit {
   getProduct() {
     this._productService.getProduct(this.productslug).subscribe(data => {
       this.product=data;
-      console.log(data);
     }, error => {
       console.log(error);
     })

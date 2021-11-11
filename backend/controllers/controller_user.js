@@ -1,13 +1,12 @@
 const User = require('../models/user');
 
 exports.loadUser = async (req, res) => {
-
     try {
         let user = await User.findById(req.payload.id);
         if (!user) {
             res.status(404);
         }
-        res.json({user: user.toAuthJSON()});
+        res.json(user.toAuthJSON());
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
@@ -16,19 +15,18 @@ exports.loadUser = async (req, res) => {
 
 exports.login = async (req, res) => {    
     try {
-        let user = await User.findOne({email: req.body.email});
+        let user = await User.findOne({email: req.body.user.email});
 
         if (!user) {
             return res.status(404).json({ msg: "User doesn't exists"});
         } else {
 
-            if (user.validPassword(req.body.password)) {
-                return res.json({user: user.toAuthJSON()});
+            if (user.validPassword(req.body.user.password)) {
+                return res.json(user.toAuthJSON());
             } else {
                 return res.status(404).json({ msg: "Pass don't match"});
             }
         }
-
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
@@ -38,12 +36,13 @@ exports.login = async (req, res) => {
 exports.register = async (req, res, next) => {
     var user = new User();
 
-    user.username = req.body.username;
-    user.email = req.body.email;
-    user.setPassword(req.body.password);
+    user.username = req.body.user.username;
+    user.email = req.body.user.email;
+    user.setPassword(req.body.user.password);
+    user.image = 'profile.png';
 
     user.save().then(function(){
-        return res.json({user: user.toAuthJSON()});
+        return res.json(user.toAuthJSON());
     }).catch(next);
 }
 
@@ -68,7 +67,7 @@ exports.updateUser = async (req, res, next) => {
     }
 
     user.save().then(function(){
-        return res.json({user: user.toAuthJSON()});
+        return res.json(user.toAuthJSON());
     });
 
 }

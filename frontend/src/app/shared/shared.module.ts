@@ -10,6 +10,8 @@ import { FiltersComponent } from './filters/filters.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SearchComponent } from './search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListErrorsComponent } from './list-errors/list-errors.component';
+import { ShowAuthedDirective } from './show-authed.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListDetailsComponent,
     FiltersComponent,
     PaginationComponent,
-    SearchComponent
+    SearchComponent,
+    ListErrorsComponent,
+    ShowAuthedDirective
   ],
   imports: [
     CommonModule,
@@ -33,7 +37,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListDetailsComponent,
     FiltersComponent,
     PaginationComponent,
-    SearchComponent
+    SearchComponent,
+    ListErrorsComponent
   ]
 })
 export class SharedModule { }

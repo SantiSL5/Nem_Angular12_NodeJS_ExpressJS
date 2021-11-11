@@ -13,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { ShopModule } from './shop/shop.module';
+import { AuthModule } from './auth/auth.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -23,6 +24,7 @@ import { ShopModule } from './shop/shop.module';
     AppRoutingModule,
     HomeModule,
     ShopModule,
+    AuthModule,
     SharedModule,
     CoreModule,
     NgbModule,

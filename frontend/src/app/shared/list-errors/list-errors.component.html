@@ -1,0 +1,5 @@
+<div class="error-messages" *ngIf="errorList">
+    <p *ngFor="let error of errorList; trackBy: trackByFn">
+      {{ error }}
+    </p>
+</div>

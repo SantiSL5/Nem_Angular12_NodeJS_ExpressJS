@@ -21,7 +21,6 @@ export class PaginationComponent implements OnInit {
 
   
   setnumpages(numpages: number){
-    console.log(numpages);
     this.numpages=numpages;
     this.pages=[];
     for (let i = 0; i < numpages; i++) {
@@ -46,7 +45,6 @@ export class PaginationComponent implements OnInit {
       }
     }
 
-    console.log(this.actualpage);
     this.change_offset.emit(this.actualpage-1);
   }
 

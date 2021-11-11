@@ -58,3 +58,15 @@ nav ul li ul li a {
     padding: 15px;
     line-height: 20px;
 }
+
+.nav-item img {
+    height: 40px;
+}
+
+.nav-list:nth-child(2) {
+    display: none;
+} 
+
+.logout {
+    cursor: pointer;
+}

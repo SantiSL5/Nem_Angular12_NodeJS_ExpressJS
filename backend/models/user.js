@@ -4,7 +4,6 @@ var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 require('../config/db.config');
 var secret = process.env.SECRET;
-console.log(secret);
 // products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product'}],
 
 var UserSchema = new mongoose.Schema({
