@@ -17,7 +17,6 @@ exports.createProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
     try {
-        console.log(req.query);
         queryfind={};
         if (req.query.cat != 'undefined' && req.query.cat != undefined) queryfind.category=req.query.cat;
         if (req.query.search != 'undefined' && req.query.search != undefined) queryfind.name=new RegExp('.*'+req.query.search+'*.',"i");
@@ -33,7 +32,6 @@ exports.getProducts = async (req, res) => {
         const products= await Product.find(queryfind).populate('categoryname').skip(offset*limit).limit(limit);
         const numproducts= await Product.aggregate([{$match:queryfind},{$count:"numproducts"}]);
         if (products.length==0) {
-            console.log(numproducts)
             res.json({'numproducts':0});
         }else {
             const result = {'numproducts': numproducts[0].numproducts,'products': products};
