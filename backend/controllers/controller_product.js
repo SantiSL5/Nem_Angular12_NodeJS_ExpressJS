@@ -31,7 +31,6 @@ exports.getProducts = async (req, res) => {
         limit=Number(req.query.limit) || 3;
         const products= await Product.find(queryfind).populate('categoryname').skip(offset*limit).limit(limit);
         const numproducts= await Product.aggregate([{$match:queryfind},{$count:"numproducts"}]);
-        console.log(products);
         if (products.length==0) {
             console.log(numproducts)
             res.json({'numproducts':0});

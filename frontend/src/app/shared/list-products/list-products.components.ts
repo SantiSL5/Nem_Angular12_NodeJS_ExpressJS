@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from "@angular/router";
 import { Subject } from "rxjs";
 // import { Observable } from "rxjs";
 // import { environment } from "src/environments/environment";
@@ -15,7 +15,6 @@ import { PaginationComponent } from "../pagination/pagination.component";
 })
 
 export class ListProductsComponent {
-
     @ViewChild(PaginationComponent)
     private pagcomponent: PaginationComponent = new PaginationComponent;
 
@@ -27,12 +26,38 @@ export class ListProductsComponent {
     listProducts: Product[] = [];
     isProducts: Boolean = true;
 
-    constructor(private _productService: ProductService, private route: ActivatedRoute) {}
+    constructor(private _productService: ProductService, private route: ActivatedRoute, router: Router) {
+        router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.route.queryParams.subscribe(params => {
+                    if (params['category'] == '') {
+                        this.category = undefined;
+                    }else {
+                        this.category = params['category'];
+                    }
+                    if (params['search'] == '') {
+                        this.search = undefined;
+                    }else {
+                        this.search = params['search'];
+                    }
+                });
+                this.getProducts();
+            }
+        });
+    }
 
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
-            this.category = params['category'];
-            this.search = params['search'];
+            if (params['category'] == '') {
+                this.category = undefined;
+            }else {
+                this.category = params['category'];
+            }
+            if (params['search'] == '') {
+                this.search = undefined;
+            }else {
+                this.search = params['search'];
+            }
         });
         this.getProducts();
     }

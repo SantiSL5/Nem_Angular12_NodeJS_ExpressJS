@@ -2,6 +2,9 @@
 @import "~bootstrap/dist/css/bootstrap.css"; 
 
 
+
+html, body { height: 100%; }
+
 body {
     padding: 0px;
     margin: 0px;
@@ -24,4 +27,3 @@ body {
     border: 1px solid black;
     margin: 5px;
 }
-

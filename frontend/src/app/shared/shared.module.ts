@@ -8,6 +8,8 @@ import { ListProductsComponent } from './list-products/list-products.components'
 import { ListDetailsComponent } from './list-details/list-details.component';
 import { FiltersComponent } from './filters/filters.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { SearchComponent } from './search/search.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,19 +17,23 @@ import { PaginationComponent } from './pagination/pagination.component';
     ListProductsComponent,
     ListDetailsComponent,
     FiltersComponent,
-    PaginationComponent
+    PaginationComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     HeaderComponent,
     ListProductsComponent,
     ListDetailsComponent,
     FiltersComponent,
-    PaginationComponent
+    PaginationComponent,
+    SearchComponent
   ]
 })
 export class SharedModule { }

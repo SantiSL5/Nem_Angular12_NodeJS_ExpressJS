@@ -1,0 +1,4 @@
+<div class="search">
+  <input type="text" placeholder="Search" [(ngModel)]="search">
+  <button [routerLink]="['/shop']" [queryParams]="{'search':search}">Search</button>
+</div>
