@@ -74,7 +74,7 @@ exports.getProducts = async (req, res) => {
 
 exports.getProduct = async (req, res) => {
     try {
-        let product = await Product.findOne({"slug":req.params.slug});
+        let product = await Product.findOne({"slug":req.params.slug}).populate('categoryname');
         if(!product) {
             res.status(404).json({ msg: 'No existe el producto'});
         }else {

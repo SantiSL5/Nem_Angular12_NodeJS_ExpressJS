@@ -1,1 +1,2 @@
-<app-list-products></app-list-products>
+<app-list-products *ngIf="!details"></app-list-products>
+<app-list-details *ngIf="details"></app-list-details>

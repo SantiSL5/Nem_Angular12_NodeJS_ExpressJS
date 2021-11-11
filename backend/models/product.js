@@ -61,6 +61,20 @@ ProductSchema.virtual('categoryname',{
     justOne: true
 })
 
+ProductSchema.virtual('estado').get(function() {
+    if (this.state==1) {
+        return "Nuevo";
+    }else if (this.state==2) {
+        return "Como nuevo"
+    }else if (this.state==3) {
+        return "Seminuevo"
+    }else if (this.state==4) {
+        return "Desgastado"
+    }else if (this.state==5) {
+        return "Antiguo"
+    }
+});
+
 ProductSchema.plugin(uniqueValitador, {message: 'is already taken'});
 
 ProductSchema.pre('validate', function(next) {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Product } from '../core/models/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop-page',
@@ -8,12 +7,19 @@ import { Product } from '../core/models/product';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
+  currentRoute: String = "";
+  details: Boolean = true;
 
-  constructor(
-    private route: ActivatedRoute,
-  ) {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.currentRoute = this.router.url;
+
+    if (this.currentRoute.startsWith('/shop/product')) {
+      this.details = true;
+    } else {
+      this.details = false;
+    }
 
   }
 

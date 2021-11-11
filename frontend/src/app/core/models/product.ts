@@ -13,8 +13,9 @@ export class Product {
     photo: string;
     dateCreate: string;
     categoryname: Category;
+    estado: number;
 
-    constructor( slug: string, name: string, category: string ,seller: string, state: number, price: number, description: string, ubication: string, shipping: boolean, photo: string, dateCreate: string, categoryname: Category ) {
+    constructor( slug: string, name: string, category: string ,seller: string, state: number, price: number, description: string, ubication: string, shipping: boolean, photo: string, dateCreate: string, categoryname: Category, estado:number) {
         this.slug = slug;
         this.name = name;
         this.category = category;
@@ -27,5 +28,6 @@ export class Product {
         this.photo = photo;
         this.dateCreate = dateCreate;
         this.categoryname = categoryname;
+        this.estado=estado;
     }
 }

@@ -26,7 +26,7 @@ export class ListProductsComponent {
     listProducts: Product[] = [];
     isProducts: Boolean = true;
 
-    constructor(private _productService: ProductService, private route: ActivatedRoute, router: Router) {
+    constructor(private _productService: ProductService, private route: ActivatedRoute, private router: Router) {
         router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.route.queryParams.subscribe(params => {
@@ -76,6 +76,10 @@ export class ListProductsComponent {
         }, (error: any) => {
             console.log(error);
         })
+    }
+
+    details(product:String) {
+        this.router.navigate(['/shop/product/'+product])
     }
 
     changeOffset(offset: number): void {
