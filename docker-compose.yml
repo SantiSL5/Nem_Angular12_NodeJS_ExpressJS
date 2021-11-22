@@ -3,39 +3,42 @@ version: "3.8"
 services:
   nembackend:
     container_name: nembackend
-    image: node:latest
+    env_file:
+      - .env
+    build:
+      context: .
+      target: backend
     tty: true
-    working_dir: /home/node/app
+    working_dir: /usr/app
     ports:
       - $BACKEND_LOCAL_PORT:$BACKEND_DOCKER_PORT
-    volumes:
-      - ./backend:/home/node/app
-      - ../error.log:/usr/src/app/error.log
     networks:
       - nem-network
     depends_on: 
       - nemmongodb
-    command: /bin/bash -c "usermod -u `stat -c '%u' .` node && groupmod -g `stat -c '%g' .` node && su node -c 'npm install && npm run dev'"
   nemfrontend:
     container_name: nemfrontend
-    image: node:latest
+    env_file:
+      - .env
+    build:
+      context: .
+      target: frontend
     tty: true
-    working_dir: /home/node/app
+    working_dir: /usr/app
     ports:
       - $FRONTEND_LOCAL_PORT:$FRONTEND_DOCKER_PORT
-    volumes:
-      - ./frontend:/home/node/app
     networks:
       - nem-network
-    command: /bin/bash -c "usermod -u `stat -c '%u' .` node && groupmod -g `stat -c '%g' .` node && su node -c 'npm install && npm start'"
   nemmongodb:
     container_name: nemmongo
-    image: mongo:latest
+    env_file:
+      - .env
+    build:
+      context: .
+      target: mongo
     environment:
       - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
       - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
-    volumes:
-      - ./backend/data:/data/db
     networks:
       - nem-network
 networks:
